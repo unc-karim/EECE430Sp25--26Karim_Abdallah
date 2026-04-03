@@ -1,0 +1,20 @@
+{% extends 'players/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <h1>Welcome</h1>
+</section>
+
+<div class="home-links">
+    <a href="{% url 'player_list' %}" class="home-card">
+        <p class="home-card-title">Manage Players</p>
+        <p class="home-card-sub">Read / Update / Delete</p>
+    </a>
+    <a href="{% url 'player_add' %}" class="home-card">
+        <p class="home-card-title">Add Player</p>
+        <p class="home-card-sub">Create</p>
+    </a>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Volley Player List{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'players/style.css' %}">
+</head>
+<body>
+    <header class="top-header">
+        <span class="brand-text">🏐 Volleyball Club</span>
+    </header>
+
+    <div class="main-wrap">
+        <div class="nav-cards">
+            <a href="{% url 'player_list' %}"
+               class="nav-card {% if request.resolver_match.url_name == 'player_list' or request.resolver_match.url_name == 'player_detail' or request.resolver_match.url_name == 'player_delete' or request.resolver_match.url_name == 'player_edit' %}active{% endif %}">
+                Players
+            </a>
+            <a href="{% url 'player_add' %}"
+               class="nav-card {% if request.resolver_match.url_name == 'player_add' %}active{% endif %}">
+                Add Player
+            </a>
+        </div>
+
+        <div class="content">
+            <div class="card">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

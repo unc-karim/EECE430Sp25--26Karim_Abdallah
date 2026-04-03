@@ -1,0 +1,45 @@
+{% extends 'players/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<section class="page-heading compact">
+    <h1>{{ title }}</h1>
+    <a href="{% url 'player_list' %}" class="btn btn-ghost">Back to List</a>
+</section>
+
+<div class="info-box">
+    Fill in the player details below and save when done.
+</div>
+
+<form method="POST" class="player-form" novalidate>
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+    <div class="form-error-summary">
+        {% for error in form.non_field_errors %}
+        <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="form-grid">
+        {% for field in form %}
+        <div class="field-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+            {% for error in field.errors %}
+            <p class="field-error">{{ error }}</p>
+            {% endfor %}
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="form-buttons">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="{% url 'player_list' %}" class="btn btn-secondary">Back</a>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'players/base.html' %}
+
+{% block title %}Delete Player{% endblock %}
+
+{% block content %}
+<section class="page-heading compact">
+    <h1>Delete Player</h1>
+</section>
+
+<div class="info-box warning-box">
+    <p>Are you sure you want to delete <strong>{{ player.name }}</strong>?</p>
+    <p>This action cannot be undone.</p>
+</div>
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-buttons">
+        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        <a href="{% url 'player_list' %}" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+{% endblock %}

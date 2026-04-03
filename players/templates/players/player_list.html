@@ -1,0 +1,56 @@
+{% extends 'players/base.html' %}
+
+{% block title %}Volley Player List{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <h1>Players</h1>
+</section>
+
+<div class="table-panel">
+    <div class="table-toolbar">
+        <p class="table-title">Player List</p>
+        <span class="table-meta">{{ players|length }} player{{ players|length|pluralize }}</span>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Date Joined</th>
+                    <th>Position</th>
+                    <th>Salary / Payment</th>
+                    <th>Contact Person</th>
+                    <th class="actions-col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in players %}
+                <tr>
+                    <td>{{ p.id }}</td>
+                    <td>{{ p.name }}</td>
+                    <td>{{ p.dateJoined|date:"M d, Y" }}</td>
+                    <td>{{ p.position }}</td>
+                    <td>${{ p.salary_payment|floatformat:2 }}</td>
+                    <td>{{ p.contactPerson }}</td>
+                    <td class="action-links">
+                        <a href="{% url 'player_detail' p.id %}" class="btn btn-view">View</a>
+                        <a href="{% url 'player_edit' p.id %}" class="btn btn-secondary">Edit</a>
+                        <a href="{% url 'player_delete' p.id %}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="empty-row">
+                        <p>No players found yet.</p>
+                        <a href="{% url 'player_add' %}" class="btn btn-primary">Create First Player</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

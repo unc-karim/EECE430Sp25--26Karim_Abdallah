@@ -1,0 +1,43 @@
+{% extends 'players/base.html' %}
+
+{% block title %}Player Details{% endblock %}
+
+{% block content %}
+<section class="page-heading compact">
+    <h1>Player Details</h1>
+    <a href="{% url 'player_list' %}" class="btn btn-ghost">Back to List</a>
+</section>
+
+<div class="details-card">
+    <div class="detail-row">
+        <p class="detail-label">ID</p>
+        <p class="detail-value">#{{ player.id }}</p>
+    </div>
+    <div class="detail-row">
+        <p class="detail-label">Name</p>
+        <p class="detail-value">{{ player.name }}</p>
+    </div>
+    <div class="detail-row">
+        <p class="detail-label">Date Joined</p>
+        <p class="detail-value">{{ player.dateJoined|date:"M d, Y" }}</p>
+    </div>
+    <div class="detail-row">
+        <p class="detail-label">Position</p>
+        <p class="detail-value">{{ player.position }}</p>
+    </div>
+    <div class="detail-row">
+        <p class="detail-label">Salary / Payment</p>
+        <p class="detail-value">${{ player.salary_payment|floatformat:2 }}</p>
+    </div>
+    <div class="detail-row">
+        <p class="detail-label">Contact Person</p>
+        <p class="detail-value">{{ player.contactPerson }}</p>
+    </div>
+
+</div>
+
+<div class="form-buttons">
+    <a href="{% url 'player_edit' player.id %}" class="btn btn-secondary">Edit</a>
+    <a href="{% url 'player_delete' player.id %}" class="btn btn-danger">Delete</a>
+</div>
+{% endblock %}
